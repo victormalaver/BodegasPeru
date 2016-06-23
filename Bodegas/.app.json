@@ -8,16 +8,87 @@
       "title": "Home View",
       "addToNavigation": true,
       "icon": "home"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "producto",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "presentacion",
+                  "dataBindingRelationChildren": "[]",
+                  "title": "Presentacion",
+                  "inputType": "shortText",
+                  "dataBindingOptional": "presentacion"
+                }
+              ],
+              "name": "editableListForm8",
+              "formType": "list"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "descripcion",
+                  "dataBindingRelationChildren": "[]",
+                  "title": "Descripcion",
+                  "inputType": "shortText",
+                  "dataBindingOptional": "descripcion"
+                }
+              ],
+              "name": "editableListForm9",
+              "formType": "detail"
+            }
+          ],
+          "name": "productoModel",
+          "dataProvider": "bodegas",
+          "collection": "producto",
+          "headerField": "nombre",
+          "imageField": "imagen",
+          "subHeaderField": "presentacion",
+          "filterField": "nombre",
+          "isMapView": false,
+          "pullToRefresh": true,
+          "endlessScroll": true,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "nombre",
+          "detailSubHeaderField": "presentacion",
+          "detailDescriptionField": "descripcion",
+          "detailImageField": "imagen",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "producto",
+      "addToNavigation": true,
+      "icon": "favorites"
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "kendo-ui-mobile:dataProvider",
+      "name": "bodegas",
+      "title": "Bodegas / Bodegas",
+      "source": "everlive",
+      "everliveKey": "r112h61ymifmxodi",
+      "offlineStorage": true
+    }
+  ],
   "name": "kendoUiMobileApp",
-  "navigation": "tabstrip",
+  "navigation": "drawer",
   "view": "home",
-  "transition": "slide",
-  "showMoreTab": true,
   "skin": "nova",
-  "skinMainColor": "#32364c",
+  "skinMainColor": "#00a2b1",
   "skinTextColor": "#ffffff",
-  "skinAccentColor": "#ff4350"
+  "skinAccentColor": "#006699"
 }
