@@ -72,6 +72,35 @@
       "title": "producto",
       "addToNavigation": true,
       "icon": "favorites"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "categoria",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "categoriaModel",
+          "dataProvider": "bodegas",
+          "collection": "categoria",
+          "headerField": "nombre",
+          "iconField": false,
+          "subHeaderField": "subcategoria",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "categoria",
+      "addToNavigation": true,
+      "icon": "bookmarks"
     }
   ],
   "dataProviders": [
