@@ -1,8 +1,54 @@
 'use strict';
 
-app.producto = kendo.observable({
+app.productoSelected = kendo.observable({
     onShow: function () {},
     afterShow: function () {},
+    ordernarProductos: function (e) {
+        // console.log(e);
+        // console.log(e.currentTarget.innerText);
+        // console.log(e.currentTarget.firstChild);
+        // console.log(e.currentTarget.firstChild.className);
+        var tipo = e.currentTarget.innerText;
+        var orden = "desc";
+        var arrow = e.currentTarget.firstChild.className;
+        switch (tipo) {
+            case "Nombre":
+                if (arrow == "km-icon km-action") {
+                    orden = "desc";
+                    e.currentTarget.firstChild.className = "km-icon km-reply";
+                    app.productoSelected.productoSelectedModel.ordenar("nombre", orden);
+                } else {
+                    orden = "asc";
+                    e.currentTarget.firstChild.className = "km-icon km-action";
+                    app.productoSelected.productoSelectedModel.ordenar("nombre", orden);
+                }
+                break;
+            case "Precio":
+                if (arrow == "km-icon km-action") {
+                    orden = "desc";
+                    e.currentTarget.firstChild.className = "km-icon km-reply";
+                    app.productoSelected.productoSelectedModel.ordenar("precio", orden);
+                } else {
+                    orden = "asc";
+                    e.currentTarget.firstChild.className = "km-icon km-action";
+                    app.productoSelected.productoSelectedModel.ordenar("precio", orden);
+                }
+                break;
+            case "Envio":
+                if (arrow == "km-icon km-action") {
+                    orden = "desc";
+                    e.currentTarget.firstChild.className = "km-icon km-reply";
+                    app.productoSelected.productoSelectedModel.ordenar("costo_envio", orden);
+                } else {
+                    orden = "asc";
+                    e.currentTarget.firstChild.className = "km-icon km-action";
+                    app.productoSelected.productoSelectedModel.ordenar("costo_envio", orden);
+                }
+                break;
+            default:
+                break;
+        }
+    }
 });
 
 // START_CUSTOM_CODE_producto
@@ -12,7 +58,7 @@ app.producto = kendo.observable({
 (function (parent) {
     var dataProvider = app.data.bodegas,
         fetchFilteredData = function (paramFilter, searchFilter) {
-            var model = parent.get('productoModel'),
+            var model = parent.get('productoSelectedModel'),
                 dataSource = model.get('dataSource');
 
             if (paramFilter) {
@@ -73,23 +119,7 @@ app.producto = kendo.observable({
             type: 'everlive',
             transport: {
                 typeName: 'producto',
-                dataProvider: dataProvider,
-                read: {
-                    headers: {
-                        "X-Everlive-Expand": JSON.stringify({
-                            "categorias": {
-                                "TargetTypeName": "categoria",
-                                "ReturnAs": "categoriaExpanded",
-                                "SingleField": "nombre" 
-                            },
-                            "id_marca": {
-                                "TargetTypeName": "marca",
-                                "ReturnAs": "marcaExpanded",
-                                "SingleField": "nombre"
-                            },
-                        })
-                    }
-                }
+                dataProvider: dataProvider
             },
             change: function (e) {
                 var data = this.data();
@@ -129,36 +159,24 @@ app.producto = kendo.observable({
             serverFiltering: true,
             serverSorting: true,
             serverPaging: true,
-            serverGrouping: true,
             pageSize: 50
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
-        productoModel = kendo.observable({
+        productoSelectedModel = kendo.observable({
             dataSource: dataSource,
             searchChange: function (e) {
-
                 var searchVal = e.target.value,
                     searchFilter;
 
-                if (searchVal.length < 4) {
-                    $("#listadoProductosAutocomplete").css("display", "none");
-                    $("#listadoCategorias").css("display", "block");
-                    return;
-                }
                 if (searchVal) {
-                    $("#listadoProductosAutocomplete").css("display", "block");
-                    $("#listadoCategorias").css("display", "none");
                     searchFilter = {
                         field: 'nombre',
                         operator: 'contains',
                         value: searchVal
                     };
-                } else {
-                    $("#listadoProductosAutocomplete").css("display", "none");
-                    $("#listadoCategorias").css("display", "block");
-
                 }
-                fetchFilteredData(productoModel.get('paramFilter'), searchFilter);
+
+                fetchFilteredData(productoSelectedModel.get('paramFilter'), searchFilter);
 
             },
             fixHierarchicalData: function (data) {
@@ -209,37 +227,31 @@ app.producto = kendo.observable({
                 return result;
             },
             itemClick: function (e) {
-                var dataItem = e.dataItem || productoModel.originalItem;
-
-                // app.mobileApp.navigate('#components/producto/details.html?uid=' + dataItem.uid);
-
-                console.log(e.dataItem.nombre);
-                app.mobileApp.navigate('#components/producto/productoSelected.html?filter=' + encodeURIComponent(JSON.stringify({
-                    field: 'categorias',
-                    value: e.dataItem.categorias,
-                    operator: 'eq'
-                })));
+                var dataItem = e.dataItem || productoSelectedModel.originalItem;
+				
+                console.log(dataItem.uid);
+                app.mobileApp.navigate('#components/producto/details.html?uid=' + dataItem.uid);
 
             },
             detailsShow: function (e) {
-                productoModel.setCurrentItemByUid(e.view.params.uid);
+                console.log(123);
+                productoSelectedModel.setCurrentItemByUid(e.view.params.uid);
             },
             setCurrentItemByUid: function (uid) {
                 var item = uid,
-                    dataSource = productoModel.get('dataSource'),
+                    dataSource = productoSelectedModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
-
+                
                 console.log(dataSource);
-
                 itemModel.imagenUrl = processImage(itemModel.imagen);
 
                 if (!itemModel.nombre) {
                     itemModel.nombre = String.fromCharCode(160);
                 }
 
-                productoModel.set('originalItem', itemModel);
-                productoModel.set('currentItem',
-                    productoModel.fixHierarchicalData(itemModel));
+                productoSelectedModel.set('originalItem', itemModel);
+                productoSelectedModel.set('currentItem',
+                    productoSelectedModel.fixHierarchicalData(itemModel));
 
                 return itemModel;
             },
@@ -256,25 +268,26 @@ app.producto = kendo.observable({
                 }
                 return processImage(imageField);
             },
+            ordenar: function (tipo, orden) {
+                console.log("tipo-orden: " + tipo + "-" + orden);
+                dataSource.sort({
+                    field: tipo,
+                    dir: orden
+                })
+            },
             currentItem: {}
         });
 
     if (typeof dataProvider.sbProviderReady === 'function') {
         dataProvider.sbProviderReady(function dl_sbProviderReady() {
-            parent.set('productoModel', productoModel);
+            parent.set('productoSelectedModel', productoSelectedModel);
         });
     } else {
-        parent.set('productoModel', productoModel);
+        parent.set('productoSelectedModel', productoSelectedModel);
     }
 
-    parent.set('onInit', function (e) {
-        /*Cargar lista de categorías*/
-        $("#listadoCategorias").kendoMobileListView({
-                dataSource: app.categoria.categoriaModel.dataSource,
-                template: kendo.template($("#listadoCategoriasTemplate").html()),
-            })
-            /**/
-            /*Cargar lista de productos*/
+    parent.set('onShow', function (e) {
+        /*Cargar lista de productos*/
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper');
@@ -294,9 +307,4 @@ app.producto = kendo.observable({
         /**/
     });
 
-})(app.producto);
-
-// START_CUSTOM_CODE_productoModel
-// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
-
-// END_CUSTOM_CODE_productoModel
+})(app.productoSelected);

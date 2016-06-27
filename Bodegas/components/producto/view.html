@@ -1,36 +1,47 @@
-<div data-role="view" data-title="producto" data-layout="main" data-model="app.producto" data-init="app.producto.onShow" data-after-show="app.producto.afterShow">
+<div data-role="view" data-use-native-scrolling="true"  data-title="producto" data-layout="main" data-model="app.producto" data-init="app.producto.onInit" data-show="app.producto.onShow" data-after-show="app.producto.afterShow">
     <header data-role="header">
         <div data-role="navbar" class="header-text">
             <a data-role="backbutton" data-align="left" class="backButtonWrapper" style="display: none;">Back</a>
             <!--             <span data-role="view-title"></span> -->
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+            <!--  Certain features like grouping and inset styling are not supported when endless scroll is enabled. -->
             <form class="km-filter-form custom-filter">
                 <div class="km-filter-wrap">
-                    <input type="search" placeholder="Buscar producto..." data-bind="{events:{keyup: productoModel.searchChange}}">
+                    <input id="searchProducto" type="search" placeholder="Buscar producto..." data-bind="{events:{keyup: productoModel.searchChange}}">
                 </div>
             </form>
-            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
         </div>
     </header>
-    <ul id="button-group-sort-producto" data-role="buttongroup" data-index="3">
-        <li data-bind="events: { click: ordernarProductos }" data-icon="action">Nombre</li>
-        <li data-bind="events: { click: ordernarProductos }" data-icon="action">Precio</li>
-        <li data-bind="events: { click: ordernarProductos }" data-icon="action">Envio</li>
-    </ul>
-    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="" data-template="productoModelTemplate" data-bind="{ source: productoModel.dataSource, events: {click: productoModel.itemClick} }" data-pull-to-refresh="true" data-endless-scroll="true">
-    </ul>
+    <div id="listadoCategorias" data-auto-bind="false" data-style="">
+    </div>
+    <script type="text/x-kendo-template" id="listadoCategoriasTemplate">
+        <div data-role="collapsible">
+            <h3>#: data['nombre'] #</h3> 
+            # if (data['subcategoria']) {#
+                # for (var i = 0; i < data['subcategoria'].length; i++) { # 
+                    <p>#= subcategoria[i] #</p>
+                # } #
+            # } #
+        </div>
+    </script>
+    <div id="listadoProductosAutocomplete" data-role="scroller" style="height: 500px;display:none;">
+        <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="" data-template="productoModelTemplate" data-bind="{ source: productoModel.dataSource, events: {click: productoModel.itemClick} }" data-pull-to-refresh="true" data-endless-scroll="true" data-type="group">
+        </ul>
+    </div>
     <!-- START_CUSTOM_CODE_productoModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
     <!-- END_CUSTOM_CODE_productoModel -->
     <script type="text/x-kendo-template" id="productoModelTemplate">
         <div class="image-with-text">
             # data = app.producto.productoModel.fixHierarchicalData(data); #
-            <img src="#: data['imagenUrl'] #">
-            <h3>#: data['nombre'] #</h3>
-            <p>#: data['presentacion'] #</p>
-        </div>
-        <div class="editableListItem">
-            <div>Precio</div>
-            <div>#= data['precio'] #</div>
+            # var remp = document.getElementById("searchProducto").value.toLowerCase(); #
+            # if (data['categoriaExpanded']) {#
+                # for (var i = 0; i < data['categoriaExpanded'].length; i++) { # 
+                	# var texto = data['nombre'].toLowerCase();#
+                    <p><strong>#:document.getElementById("searchProducto").value#</strong>#:texto.replace(remp,"")#</p>
+                    <h5> #= categoriaExpanded[i] #</h5>
+                # } #
+            # } #
         </div>
     </script>
 </div>

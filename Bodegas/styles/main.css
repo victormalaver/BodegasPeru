@@ -182,9 +182,13 @@
     max-width: 100%;
 }
 
-#kendoUiMobileApp .km-content li .image-with-text img {
+/* #kendoUiMobileApp .km-content li .image-with-text img {
     width: 30%;
     height: 30%;
+} */
+#kendoUiMobileApp .km-content li .image-with-text img {
+    width: auto;
+    height: 90px;
 }
 
 #kendoUiMobileApp.km-nova .km-content li label.km-label-above img {

@@ -118,6 +118,6 @@
   "view": "home",
   "skin": "nova",
   "skinMainColor": "#00a2b1",
-  "skinTextColor": "#ffffff",
-  "skinAccentColor": "#006699"
+  "skinTextColor": "#efefef",
+  "skinAccentColor": "#01808c"
 }
