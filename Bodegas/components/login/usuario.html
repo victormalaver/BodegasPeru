@@ -1,0 +1,50 @@
+<div data-role="view" data-title="Registro" data-layout="main-nonav" data-model="app.usuario" data-show="app.usuario.onShow" data-after-show="app.usuario.afterShow">
+    <div class="signup-view">
+        <form>
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label>Nombre
+                        <input type="text" data-bind="value: usuarioModel.displayName">
+                    </label>
+                </li>
+                <li> 
+                    <label>Apellido
+                        <input type="text" data-bind="value: usuarioModel.apellido">
+                    </label>
+                </li>
+                <li>
+                    <label>correo
+                        <input type="email" data-bind="value: usuarioModel.email" required>
+                    </label>
+                </li>
+                <li>
+                    <label>contraseña
+                        <input type="password" data-bind="value: usuarioModel.password">
+                    </label>
+                </li>
+                <li>
+                    <label>contraseña
+                        <input type="password" data-bind="value: usuarioModel.password2">
+                    </label>
+                </li>
+                
+            </ul>
+            <div class="button-group button-group-vertical">
+                <a class="primary" data-role="button" data-bind="events: { click: usuarioModel.register }">Crear</a>
+                <a data-role="button" href="components/login/view.html">Regresar</a>
+            </div>
+        </form>
+    </div>
+    <div class="offline" align="center" style="display:none;">
+        You are currently offline. Before using this app in offline mode you must initialize it while you are online
+    </div>
+    <!-- START_CUSTOM_CODE_usuarioModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_usuarioModel -->
+
+    <!-- START_CUSTOM_CODE_usuario -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_usuario -->
+</div>

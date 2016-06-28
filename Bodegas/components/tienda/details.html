@@ -1,0 +1,21 @@
+<div data-role="view" data-title="Details" data-model="app.tienda.tiendaModel" data-bind="events: { show: detailsShow }" id="tiendaModelDetailsView">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: currentItem['nombre']"></span>
+        </div>
+    </header>
+
+    <div class="details-content">
+        <div class="km-listview-wrapper">
+            <ul class="km-listview km-list km-listinset details-fields">
+                <li>
+                    <h3 data-bind="text: currentItem.costo_minimo"></h3></li>
+                <li>
+                    <p data-bind="text: currentItem.metodoPagoExpanded"></p>
+                </li>
+                <li><img data-bind="attr: { src: currentItem.imagenUrl }" width="100%" height="auto"></li>
+            </ul>
+        </div>
+    </div>
+</div>

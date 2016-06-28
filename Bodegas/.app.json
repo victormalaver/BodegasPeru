@@ -101,6 +101,180 @@
       "title": "categoria",
       "addToNavigation": true,
       "icon": "bookmarks"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "login",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:authentication",
+          "name": "loginModel",
+          "dataProvider": "bodegas",
+          "emailLabel": "correo",
+          "emailPlaceholder": "correo",
+          "passwordLabel": "contraseña",
+          "passwordPlaceholder": "contraseña",
+          "signinLabel": "Entrar",
+          "signinRedirect": "producto",
+          "enableRegistration": true,
+          "gotoRegisterLabel": "Registrarse",
+          "registerEmailLabel": "correo",
+          "registerPasswordLabel": "contraseña",
+          "registerNameLabel": "nombre",
+          "registerLabel": "Crear",
+          "registerRedirect": "producto",
+          "gotoSigninLabel": "Regresar",
+          "enableLogout": true,
+          "logoutLabel": "Cerrar Sesión",
+          "enableRememberme": false
+        }
+      ],
+      "title": "Authentication",
+      "addToNavigation": false
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "tienda",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "tiendaModel",
+          "dataProvider": "bodegas",
+          "collection": "tienda",
+          "headerField": "nombre",
+          "imageField": "imagen",
+          "filterField": "afiliacion",
+          "isMapView": false,
+          "pullToRefresh": true,
+          "endlessScroll": true,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "nombre",
+          "detailSubHeaderField": "costo_minimo",
+          "detailDescriptionField": "id_metodo_pago",
+          "detailImageField": "imagen",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "tienda",
+      "addToNavigation": true,
+      "icon": "organize"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "departamento",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "departamentoModel",
+          "dataProvider": "bodegas",
+          "collection": "departamento",
+          "headerField": "nombre",
+          "subHeaderField": "nombre",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "departamento",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "provincia",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "provinciaModel",
+          "dataProvider": "bodegas",
+          "collection": "provincia",
+          "headerField": "nombre",
+          "subHeaderField": "id_departamento",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "provincia",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "distrito",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "distritoModel",
+          "dataProvider": "bodegas",
+          "collection": "distrito",
+          "headerField": "nombre",
+          "subHeaderField": "id_provincia",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "distrito",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "direccion",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "direccionModel",
+          "dataProvider": "bodegas",
+          "collection": "direccion",
+          "headerField": "domicilio",
+          "subHeaderField": "id_distrito",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "direccion",
+      "addToNavigation": true,
+      "icon": "globe"
     }
   ],
   "dataProviders": [

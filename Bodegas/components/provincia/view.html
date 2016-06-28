@@ -1,0 +1,36 @@
+<div data-role="view" data-title="provincia" data-layout="main" data-model="app.provincia" data-show="app.provincia.onShow" data-after-show="app.provincia.afterShow">
+
+    <!-- START_CUSTOM_CODE_provincia -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_provincia -->
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left" class="backButtonWrapper" style="display: none;">Back</a>
+            <span data-role="view-title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+
+        </div>
+    </header>
+
+
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="provinciaModelTemplate" data-bind="{ source: provinciaModel.dataSource, events: {click: provinciaModel.itemClick} }" data-pull-to-refresh="false"
+    data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_provinciaModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_provinciaModel -->
+    <script type="text/x-kendo-template" id="provinciaModelTemplate">
+        <div class="image-with-text">
+            # data = app.provincia.provinciaModel.fixHierarchicalData(data); #
+
+            <h3>#: data['nombre'] #</h3>
+            <p>#: data['id_departamento'] #</p>
+        </div>
+    </script>
+</div>

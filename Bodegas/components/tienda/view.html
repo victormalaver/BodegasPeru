@@ -1,0 +1,44 @@
+<div data-role="view" data-title="tienda" data-layout="main" data-model="app.tienda" data-show="app.tienda.onShow" data-after-show="app.tienda.afterShow">
+
+    <!-- START_CUSTOM_CODE_tienda -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_tienda -->
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left" class="backButtonWrapper" style="display: none;">Back</a>
+            <span data-role="view-title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+
+        </div>
+    </header>
+
+
+    <!--  Certain features like grouping and inset styling are not supported when endless scroll is enabled. -->
+    <form class="km-filter-form custom-filter">
+        <div class="km-filter-wrap">
+            <input type="search" placeholder="Search..." data-bind="{events:{keyup: tiendaModel.searchChange}}">
+        </div>
+    </form>
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="" data-template="tiendaModelTemplate" data-bind="{ source: tiendaModel.dataSource, events: {click: tiendaModel.itemClick} }" data-pull-to-refresh="true" data-endless-scroll="true">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_tiendaModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_tiendaModel -->
+    <script type="text/x-kendo-template" id="tiendaModelTemplate">
+        <div class="image-with-text">
+            # data = app.tienda.tiendaModel.fixHierarchicalData(data); #
+
+            <img src="#: data['imagenUrl'] #">
+            <h3>#: data['nombre'] #</h3>
+            <h3>#: data['costo_minimo'] #</h3>
+            <h3>#: data['estado_abierto'] #</h3>
+
+        </div>
+    </script>
+</div>
