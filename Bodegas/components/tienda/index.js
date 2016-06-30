@@ -1,6 +1,7 @@
 'use strict';
 
 app.tienda = kendo.observable({
+    dataInit: function () {},
     onShow: function () {},
     afterShow: function () {}
 });
@@ -81,6 +82,11 @@ app.tienda = kendo.observable({
                                 "TargetTypeName": "metodo_pago",
                                 "ReturnAs": "metodoPagoExpanded",
                                 "SingleField": "nombre"
+                            },
+                            "id_direccion": {
+                                "TargetTypeName": "distrito",
+                                "ReturnAs": "distritoExpanded",
+                                "SingleField": "Id"
                             },
                         })
                     }
@@ -227,6 +233,9 @@ app.tienda = kendo.observable({
                     return processImage(this.get("currentItem." + imageField.split("|")[0]));
                 }
                 return processImage(imageField);
+            },
+            aceptarModalviewAlert: function () {
+                closeModal('modalview-alert');
             },
             currentItem: {}
         });

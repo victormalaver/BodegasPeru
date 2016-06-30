@@ -1,0 +1,23 @@
+<div data-role="view" data-title="tienda" data-layout="main" data-model="app.filtro" data-init="app.filtro.dataInit" data-show="app.filtro.onShow" data-after-show="app.filtro.afterShow">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left" class="backButtonWrapper" style="display: none;">Back</a>
+            <span data-role="view-title"></span>
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+        </div>
+    </header>
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <select id="departamento-select-filtro"></select>
+        </li>
+        <li>
+            <select id="provincia-select-filtro"></select>
+        </li>
+        <li>
+            <select id="distrito-select-filtro"></select>
+        </li>
+    </ul>
+    <div class="button-group button-group-vertical">
+        <a class="primary" data-role="button" data-bind="events: { click: goToTienda }">Crear</a>
+    </div>
+</div>
